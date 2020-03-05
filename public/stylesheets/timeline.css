@@ -1,0 +1,94 @@
+.options a{
+    color: #fff !important;
+}
+
+p.lead{
+    font-size: 14px;
+}
+
+.post{
+    position: relative;
+    width: 100%;
+    min-height: 100px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 4px;
+    padding: 10px 10px 30px 10px;
+    margin-bottom: 40px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.062), 0 3px 6px rgba(0, 0, 0, 0.123);
+}
+
+.postTop{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: 50px;
+    /* background-color: red; */
+}
+
+.postDetails{
+    /* margin-left: 10px; */
+}
+
+.postDetails h6{
+    margin-bottom: 0px;
+    color: rgb(75, 75, 75);
+}
+
+.post > p{
+    /* padding: 0 20px; */
+    font-size: 13px;
+    margin-top: 10px;
+}
+
+.usrPrfl{
+    overflow: hidden;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.usrPrfl img.prflpic{
+    width: 100%;
+    height: 100%;
+}
+
+.options{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    right: 5%;
+    width: 120px;
+    padding: 0 10px;
+    height: 40px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 100px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.062), 0 3px 6px rgba(0, 0, 0, 0.123);
+}
+
+.options > .icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(17, 178, 206);
+    width: 25px;
+    font-size: 12px;
+    height: 25px;
+    cursor: pointer;
+    color: #fff;
+    border-radius: 50%;
+    transition: all cubic-bezier(0.19, 1, 0.22, 1) .3s;
+}
+
+.options > .icon:nth-child(1){
+    background-color: rgb(139, 240, 144);
+}
+
+.options > .icon:hover{
+    transform: scale(1.1) rotate(-10deg);
+}
+
+.options > .icon:nth-child(2){
+    background-color: rgb(255, 177, 177);
+}

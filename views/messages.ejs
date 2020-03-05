@@ -1,0 +1,38 @@
+<link rel="stylesheet" href="../stylesheets/timeline.css">
+
+<% include ./partials/header.ejs %>
+
+<div class="container pt-5 mt-4">
+    <h1>You can send a new message to any user by clicking send a new message</h1>
+    <button class="btn btn-success">Send A New Message</button>
+    <hr>
+    <h4 class="lead">All Messages</h4>
+    <div class="posts mt-3">
+
+        <% for(user in msgs){ %>
+            <div class="post">
+                <h4 class="text-primary"><%= user %></h4>
+                <div class="postDetails">
+                    <p>Last Message : <%= msgs[user].reverse()[0].text %></p>
+                    <a class="btn btn-sm btn-success" href=<%= '/chat/'+user %>>Open Chat</a>
+                </div>
+            </div>
+        <% } %>
+    </div>
+</div>
+
+
+<script>
+    $(window).scroll(function () {
+        //set scroll position in session storage
+        sessionStorage.scrollPos = $(window).scrollTop();
+    });
+    var init = function () {
+        //get scroll position in session storage
+        $(window).scrollTop(sessionStorage.scrollPos || 0)
+    };
+    window.onload = init;
+</script>
+
+
+<% include ./partials/footer.ejs %>

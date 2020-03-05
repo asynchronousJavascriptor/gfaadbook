@@ -1,0 +1,131 @@
+<% include ./partials/header.ejs %>
+<link rel="stylesheet" href="/stylesheets/timeline.css">
+
+<style>
+  .jumbotron {
+    background-size: cover;
+    background-position: top;
+    background-image: url(https://images.unsplash.com/photo-1490578474895-699cd4e2cf59?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1051&q=80);
+  }
+</style>
+
+<div class="jumbotron">
+  <h5 class="display-4">Latest Posts !</h5>
+  <hr>
+  <% if(randomPosts.length !== 0){ %>
+  <% randomPosts.forEach(function(post){ %>
+  <div class="post">
+    <div class="postTop">
+      <div class="usrPrfl">
+        <img class="prflpic" src=<%= post.user.profilePic %> alt="a">
+      </div>
+      <div class="postDetails">
+        <a href="#">
+          <h6><%= post.user.name %></h6>
+        </a>
+        <small>@<%= post.user.username %></small>
+      </div>
+    </div>
+    <p><%= post.postText %></p>
+    <small><%= post.likes.length %> Likes, <%= post.dislikes.length %> dislikes, & <%= post.loves.length %> Love
+      Reactions</small>
+    <div class="options">
+      <span id="love" title="Love" class="icon">
+        <a href=<%= '/loves/'+post._id %>><i class="fa fa-heart"></i></a>
+      </span>
+      <span id="like" title="Like" class="icon">
+        <a href=<%= '/likes/'+post._id %>><i class="fa fa-thumbs-up"></i></a>
+      </span>
+      <span id="dislike" title="Dislike" class="icon">
+        <a href=<%= '/dislikes/'+post._id %>><i class="fa fa-thumbs-down"></i></a>
+      </span>
+    </div>
+  </div>
+  <% }) %>
+  <% } else { %>
+  <div class="card">
+    <div class="card-body">
+      <small class="muted">No Posts Available To Show</small>
+    </div>
+  </div>
+  <% } %>
+  <a class="btn btn-primary mt-3" href="/timeline">Read More Stories From Users</a>
+</div>
+
+<div class="container">
+  <h3 class="mt-2 mb-5 text-center">Know More About <span class="text-primary">GFaadBook</span></h3>
+  <div class="card-columns">
+    <div class="card">
+      <img
+        src="https://images.unsplash.com/photo-1506863530036-1efeddceb993?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=941&q=80"
+        class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Anonymous App to put your thoughts.</h5>
+        <p class="card-text">The beauty of this app is that you can share your thoughts anonymously and no one will be
+          able to know who you were.</p>
+      </div>
+    </div>
+    <div class="card p-3">
+      <blockquote class="blockquote mb-0 card-body">
+        <p>Life is what happens when you’re busy making other plans.</p>
+        <footer class="blockquote-footer">
+          <small class="text-muted">
+            John Lennon
+          </small>
+        </footer>
+      </blockquote>
+    </div>
+    <div class="card">
+      <img
+        src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80"
+        class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">John Doe</h5>
+        <p class="card-text">A man who has curly hairs looks way better than a man who looks ugly.</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      </div>
+    </div>
+    <div class="card bg-primary text-white text-center p-3">
+      <blockquote class="blockquote mb-0">
+        <p>Get busy living or get busy dying.</p>
+        <footer class="blockquote-footer text-white">
+          <small>
+            Stephen King
+          </small>
+        </footer>
+      </blockquote>
+    </div>
+    <div class="card text-center">
+      <div class="card-body">
+        <h5 class="card-title">Who are you is as important as whou you were.</h5>
+        <p class="card-text">Share such amazing writings to the people across the country and around the world.</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      </div>
+    </div>
+    <div class="card">
+      <img
+        src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80"
+        class="card-img-top" alt="...">
+    </div>
+    <div class="card p-3 text-right">
+      <blockquote class="blockquote mb-0">
+        <p>You only live once, but if you do it right, once is enough.</p>
+        <footer class="blockquote-footer">
+          <small class="text-muted">
+            Mae West
+          </small>
+        </footer>
+      </blockquote>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Jane Doe</h5>
+        <p class="card-text">The truth you need to know more than that Earth is round, not flat is C & C++ is not
+          important for jobs.</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% include ./partials/footer.ejs %>

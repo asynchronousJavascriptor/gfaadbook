@@ -1,0 +1,119 @@
+<% include ./partials/header.ejs %>
+
+<link rel="stylesheet" href="../stylesheets/profile.css">
+<div class="flex container mt-5 pt-4 pb-4">
+    <div id="left">
+        <div class="profilePicFrame">
+            <div id="profilePic">
+                <img class="prflpic"
+                    src=<%= userDets.profilePic %>
+                    alt="a">
+            </div>
+        </div>
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Send Message Anonymously</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action=<%= '/message/'+userDets._id %> method="post">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="exampleFormControlTextarea1">Write your Message here ...</label>
+                                <textarea name="message" class="form-control" id="exampleFormControlTextarea1"
+                                    rows="3"></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" class="btn btn-primary" value="Send Message">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="details p-2 pl-3 pr-3">
+            <h4><%= userDets.name %></h4>
+            <h6 class="lead">Designer & Developer</h6>
+            <p class="lead mt-4"><%= userDets.about %>
+            </p>
+            <div class="icns flexy">
+                <a href="#" title="Call Now" class="icon"><i class="fa fa-phone"></i></a>
+                <a href="#"><span title="Buzz Them" class="icon ml-3"><i class="fa fa-bell"></i></span></a>
+                <span data-toggle="modal" data-target="#exampleModalCenter" title="Say Anonymously" class="icon ml-3"><i
+                        class="fa fa-comment"></i></span>
+            </div>
+            <% if(editable) { %>
+                <a class="mt-4 btn btn-sm btn-primary" href="/update">Edit Profile</a>
+                <form class="mt-4" action="/post" method="POST">
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">What's your current thought ?</label>
+                        <textarea class="form-control" name="post" id="exampleFormControlTextarea1" rows="3"
+                            placeholder="Write your thought here..."></textarea>
+                    </div>
+                    <input type="submit" class="btn btn-primary" value="Post It">
+                </form>
+            <% } %>
+
+            <hr>
+            <div class="prevPost mt-4">
+                <h4>Previous Posts</h4>
+                <small>Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit facilis atque exercitationem
+                    magni?</small>
+                <div id="posts" class="posts mt-4">
+                    <% userDets.posts.reverse().forEach(function(post){ %>
+                    <div class="post">
+                        <div class="postTop">
+                            <div class="usrPrfl">
+                                <img class="prflpic" src=<%= userDets.profilePic %> alt="a">
+                            </div>
+                            <div class="postDetails">
+                                <h6><%= userDets.username %></h6>
+                                <small><% if(userDets.city === undefined) { %>
+                                    city not known
+                                <% } else { %>
+                                    <%= userDets.city %>
+                                <% } %></small>
+                            </div>
+                        </div>
+                        <p><%= post.postText %></p>
+                        <small>
+                            <%= post.likes.length %> Likes,
+                            <%= post.dislikes.length %> dislikes,
+                            <%= post.loves.length %> Love Reactions</small>
+                        <div class="options">
+                            <span id="love" title="Love" class="icon">
+                                <a href=<%= "/loves/"+post._id %>><i class="fa fa-heart"></i></a>
+                            </span>
+                            <span id="like" title="Like" class="icon">
+                                <a href=<%= "/likes/"+post._id %>><i class="fa fa-thumbs-up"></i></a>
+                            </span>
+                            <span id="dislike" title="Dislike" class="icon">
+                                <a href=<%= "/dislikes/"+post._id %>><i class="fa fa-thumbs-down"></i></a>
+                            </span>
+                        </div>
+                    </div>
+                    <% }) %>
+                    <p class="text-center"><small>No More Posts Left</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="right">
+    </div>
+</div>
+
+<script>
+    $(window).scroll(function () {
+        sessionStorage.scrollPos = $(window).scrollTop();
+    });
+    var init = function () {
+        $(window).scrollTop(sessionStorage.scrollPos || 0)
+    };
+    window.onload = init;
+</script>
+
+<% include ./partials/footer.ejs %>

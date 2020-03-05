@@ -1,0 +1,62 @@
+<link rel="stylesheet" href="../stylesheets/timeline.css">
+
+<% include ./partials/header.ejs %>
+
+<div class="container pt-5 mt-4">
+    <h2 class="display-5">Hello, User 👋</h2>
+    <p class="lead">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Incidunt, consequuntur quod nihil, quam
+        obcaecati iure similique atque eius et impedit nam eveniet est.</p>
+    <a href="/profile" class="btn btn-primary">I Want To Write A Post</a>
+    <hr>
+    <h4 class="lead">Latest Posts</h4>
+    <div class="posts mt-3">
+        <% allHisPosts.forEach(function(post){ %>
+            <div class="post">
+                <div class="postTop">
+                    <div class="usrPrfl">
+                        <img class="prflpic"
+                            src=<%= post.user.profilePic %>
+                            alt="a">
+                    </div>
+                    <div class="postDetails">
+                        <a href="#"><h6><%= post.user.username %></h6></a>
+                        <% if(post.user.city === undefined){ %>
+                            <small>city not known</small>
+                        <% } else { %>
+                            <small><%= post.user.city %></small>
+                        <% } %>
+                    </div>
+                </div>
+                <p><%= post.postText %></p>
+                <small><%= post.likes.length %> Likes, <%= post.dislikes.length %> dislikes, & <%= post.loves.length %> Love Reactions</small>
+                <div class="options">
+                    <span id="love" title="Love" class="icon">
+                        <a href=<%= '/loves/'+post._id %>><i class="fa fa-heart"></i></a>
+                    </span>
+                    <span id="like" title="Like" class="icon">
+                        <a href=<%= '/likes/'+post._id %>><i class="fa fa-thumbs-up"></i></a>
+                    </span>
+                    <span id="dislike" title="Dislike" class="icon">
+                        <a href=<%= '/dislikes/'+post._id %>><i class="fa fa-thumbs-down"></i></a>
+                    </span>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+</div>
+
+
+<script>
+    $(window).scroll(function () {
+        //set scroll position in session storage
+        sessionStorage.scrollPos = $(window).scrollTop();
+    });
+    var init = function () {
+        //get scroll position in session storage
+        $(window).scrollTop(sessionStorage.scrollPos || 0)
+    };
+    window.onload = init;
+</script>
+
+
+<% include ./partials/footer.ejs %>
